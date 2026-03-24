@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love Login</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: pink;
+        overflow: hidden;
+    }
+
+    /* Center box */
+    .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    /* Heart shape */
+    .heart {
+        width: 200px;
+        height: 200px;
+        background: red;
+        position: relative;
+        transform: rotate(-45deg);
+        margin: auto;
+    }
+
+    .heart::before,
+    .heart::after {
+        content: "";
+        width: 200px;
+        height: 200px;
+        background: red;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+    .heart::before {
+        top: -100px;
+        left: 0;
+    }
+
+    .heart::after {
+        left: 100px;
+        top: 0;
+    }
+
+    /* Login form */
+    .login-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    input {
+        display: block;
+        margin: 10px auto;
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        background: white;
+        cursor: pointer;
+    }
+
+    /* Second page */
+    #lovePage {
+        display: none;
+        text-align: center;
+        color: white;
+        font-size: 40px;
+        margin-top: 100px;
+    }
+
+    /* Flying hearts */
+    .flying-heart {
+        position: absolute;
+        color: red;
+        font-size: 20px;
+        animation: floatUp 5s linear infinite;
+    }
+
+    @keyframes floatUp {
+        from {
+            transform: translateY(100vh);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-10vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- Login Page -->
+<div class="container" id="loginPage">
+    <div class="heart"></div>
+
+    <div class="login-box">
+        <h2 style="color:white;">Love Login 💖</h2>
+        <input type="text" id="username" placeholder="Your Name">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Enter</button>
+    </div>
+</div>
+
+<!-- Love Page -->
+<div id="lovePage">
+    💖 I LOVE YOU BACCHU 💖
+</div>
+
+<script>
+    function login() {
+        let user = document.getElementById("username").value;
+        let pass = document.getElementById("password").value;
+
+        // Change credentials here
+        if (user === "love" && pass === "1234") {
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("lovePage").style.display = "block";
+            startHearts();
+        } else {
+            alert("Wrong love credentials 💔");
+        }
+    }
+
+    function startHearts() {
+        setInterval(() => {
+            let heart = document.createElement("div");
+            heart.className = "flying-heart";
+            heart.innerHTML = "❤️";
+
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.fontSize = (15 + Math.random() * 30) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
